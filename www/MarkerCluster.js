@@ -112,6 +112,14 @@ var MarkerCluster = function (map, markerClusterOptions, _exec) {
         icons[i] = link.protocol + '//' + link.host + link.pathname + link.search;
         link = undefined;
       }
+    } else if(typeof icons[i].url === 'string' && icons[i].url.indexOf('blob:') ===0) {
+
+        link = document.createElement('a');
+        link.href = icons[i].url;
+        icons[i].url = 'blob:' + link.protocol + '//' + link.host + link.pathname + link.search;
+        console.log(icons[i].url);
+        link = undefined;
+
     } else if (typeof icons[i].url === 'string') {
       if (icons[i].url.indexOf('://') === -1 &&
         icons[i].url.indexOf('.') === 0) {
